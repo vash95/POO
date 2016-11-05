@@ -9,7 +9,7 @@ public class prueba {
 		TarjetaMonedero borja = new TarjetaMonedero("A156Bv09_1zXo894",5.0);
 		MaquinaVending 	sen = new MaquinaVending(5,5);
 		Producto polloAlLimon = new Producto("Pollo al limón",5.0,"80808080800");
-		//prueba del git para pajero y miguel
+		
 		sen.añadirVariosProductos(polloAlLimon, 0, 10);
 		//System.out.println(borja.getSaldoActual());
 		//sen.añadirUnProducto(polloAlLimon,0);
