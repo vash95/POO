@@ -1,23 +1,25 @@
 package uva.poo.entrega1;
-
 import java.util.ArrayList;
 
 import fabricante.externo.tarjetas.TarjetaMonedero;
-
+/**
+ * 
+ * @author 
+ *
+ */
 public class MaquinaVending {
-
-   private ArrayList<ArrayList<Producto>> maquina ;
-   private ArrayList<Producto> fila;
-   private int tamMaquina;
-   private int cantidad;
+	private ArrayList<ArrayList<Producto>> maquina ;
+	private ArrayList<Producto> fila;
+	private int tamMaquina;
+	private int cantidad;
    
-   public MaquinaVending(){
-     tamMaquina=1;
-     cantidad=1;
-     maquina=new ArrayList<ArrayList<Producto>>(tamMaquina);
-     fila= new ArrayList<Producto>(cantidad);
-     maquina.add(fila);
-   }
+	public MaquinaVending(){
+		tamMaquina = 1;
+		cantidad = 1;
+		maquina = new ArrayList<ArrayList<Producto>>(tamMaquina);
+		fila = new ArrayList<Producto>(cantidad);
+		maquina.add(fila);
+	}
   
    public MaquinaVending(int tamMaquina, int cantidad){
 	   	 assert(this.tamMaquina>0&&this.cantidad>0);

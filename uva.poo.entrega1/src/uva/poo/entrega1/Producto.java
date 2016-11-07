@@ -1,6 +1,6 @@
 package uva.poo.entrega1;
 /**
- * Implementa un producto
+ * Implementación de productos que tienen nombre, precio y UCP.
  * Práctica 1 de POO
  * @author Álvaro Benito Navarro
  * @author Miguel Gonzalez Bravo
@@ -8,14 +8,13 @@ package uva.poo.entrega1;
  *
  */
 public class Producto {
-	//atributos, nombre como String, precio sera un entero conteniendo los centimos
-	//y el up sera un long ya que se necesitan 12 digitos.
+	//Atributos de la clase, nombre, double y upc
 	private String nombre;
 	private double precio;
 	private String upc;
 	
-	/**Constructor sin argumentos
-	 * 
+	/**
+	 * Inicializa una instancia de la clase Producto con unos valores por defecto
 	 */
 	public Producto(){
 		this.nombre=null;
@@ -23,9 +22,8 @@ public class Producto {
 		this.upc=null;
 	}
 
-	
 	/**
-	 * Inicializa una instancia de la clase producto con los valores que se pasan por parametro
+	 * Inicializa una instancia de la clase Producto con los valores que se pasan por parametro
 	 * @param nombre String con el nombre
 	 * @param precio int que indicará el precio en céntimos
 	 * @param upc long que será un número de 11 digitos, serán modificados por la clase y se añadirá el dígito de control
@@ -44,39 +42,35 @@ public class Producto {
 		this.upc=upc;
 		DigitoDeControl();
 	}
-	/**Metodo que cambia el valor de UPC para añadir el digito de control
-	 * 
-	 */
-    private void DigitoDeControl(){
-    int s=0,a,m;
-    String r;
-    for(int i =0;i<11;i++){
-    	a=((int)getUpc().charAt(i))-48;
-        if(i%2==0){
-            s+=a*3;
-        }else{
-            s+=a;
-        	}
-        }
-        m=10-(s%10);  
-        r=String.valueOf(m%10);
-        upc=(getUpc()+r);
-    }
-    /**
-     * Metodo que devuelve boolean true si la cadena es correcta y False si en no es corecta
-     * @param cad String de la cadena que queremos comprpbar sus caracteres
-     * @return valido Verdadero si no encuentra un caracter erroneo y Falso si lo encuntra
-      */
-    private static boolean UPCValido(String cad){
-        boolean valido=true;
-        //Recorre la cadena
-        for (int i=0; i<cad.length(); i++){
-          //Comprueba que el digito sea un numero
-          if((int)cad.charAt(i)<48 || (int)cad.charAt(i)>57){
-            valido=false;
-          }
-        }return valido;
-      }
+	
+	//Metodo que cambia el valor de UPC para añadir el digito de control 
+	private void DigitoDeControl(){
+		int s=0,a,m;
+		String r;
+		for(int i =0;i<11;i++){
+			a=((int)getUpc().charAt(i))-48;
+			if(i%2==0){
+				s+=a*3;
+			}else{
+				s+=a;
+			}
+		}
+		m=10-(s%10);  
+		r=String.valueOf(m%10);
+		upc=(getUpc()+r);
+		}
+    
+	//Comprueba si un String que contiene el UPC es válido
+	private static boolean UPCValido(String cad){
+		boolean valido=true;
+		//Recorre la cadena
+		for (int i=0; i<cad.length(); i++){
+			//Comprueba que el digito sea un numero
+			if((int)cad.charAt(i)<48 || (int)cad.charAt(i)>57){
+				valido=false;
+			}
+		}return valido;
+	}
     /**
      * Devuelve el nombre del producto
      * @return nombre String con el nombre

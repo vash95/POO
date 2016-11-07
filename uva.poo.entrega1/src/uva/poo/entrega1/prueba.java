@@ -9,7 +9,7 @@ public class prueba {
 		TarjetaMonedero borja = new TarjetaMonedero("A156Bv09_1zXo894",5.0);
 		MaquinaVending 	sen = new MaquinaVending(5,5);
 		Producto polloAlLimon = new Producto("Pollo al limón",5.0,"80808080800");
-		Producto ta = new Producto("rita",5.0,"66666666669");
+		Producto ta = new Producto("rita",5.00010,"66666666669");
 		
 		//System.out.println(polloAlLimon.toString());
 		//miwell what marga mola
