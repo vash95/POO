@@ -47,6 +47,7 @@ public class MaquinaVending {
 		   quitaUno(index);
 	   }
    }
+   //hola
    //Funciones de añadir/eleminar uno o varios 
    public void añadirUnProducto(Producto producto, int linea){
 	   assert(filaLlena(linea)!=true);
