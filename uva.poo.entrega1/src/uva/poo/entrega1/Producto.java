@@ -3,16 +3,15 @@ package uva.poo.entrega1;
  * Implementación de productos que tienen nombre, precio y UCP.
  * Práctica 1 de POO
  * @author Álvaro Benito Navarro
- * @author Miguel Gonzalez Bravo
+ * @author Miguel González Bravo
  * @author Borja Rabadán Martín
  *
  */
 public class Producto {
-	//Atributos de la clase, nombre, double y upc
+	//Atributos de la clase
 	private String nombre;
 	private double precio;
 	private String upc;
-	
 	/**
 	 * Inicializa una instancia de la clase Producto con unos valores por defecto
 	 */
@@ -21,12 +20,12 @@ public class Producto {
 		this.precio=0;
 		this.upc=null;
 	}
-
 	/**
-	 * Inicializa una instancia de la clase Producto con los valores que se pasan por parametro
-	 * @param nombre String con el nombre
-	 * @param precio int que indicará el precio en céntimos
-	 * @param upc long que será un número de 11 digitos, serán modificados por la clase y se añadirá el dígito de control
+	 * Inicializa una instancia de la clase Producto con los valores dados como argumento
+	 * El dígito de control se calcula automáticamente
+	 * @param nombre, String con el nombre
+	 * @param precio, double que indicará el precio en céntimos
+	 * @param upc, String con los dígitos del UPC, sin el de control
 	 * @assert.pre nombre!=""
 	 * @assert.pre precio>0
 	 * @assert.pre upc.length()==11
@@ -41,9 +40,8 @@ public class Producto {
 		this.precio=precio;
 		this.upc=DigitoDeControl(upc);
 	}
-	
-	//Metodo que cambia el valor de UPC para añadir el digito de control 
 	private String DigitoDeControl(String upc){
+		//Método que cambia el valor de UPC para añadir el dígito de control 
 		int s=0,a,m;
 		String r,resultado;
 		for(int i =0;i<11;i++){
@@ -59,11 +57,9 @@ public class Producto {
 		resultado=upc+r;
 		return resultado;
 	}
-    
-	//Comprueba si un String que contiene el UPC es válido
 	private static boolean UPCValido(String cad){
+		//Comprueba si un String que contiene el UPC es válido
 		boolean valido=true;
-		//Recorre la cadena
 		for (int i=0; i<cad.length(); i++){
 			//Comprueba que el digito sea un numero
 			if((int)cad.charAt(i)<48 || (int)cad.charAt(i)>57){
@@ -73,14 +69,14 @@ public class Producto {
 	}
     /**
      * Devuelve el nombre del producto
-     * @return nombre String con el nombre
+     * @return nombre, String con el nombre
      */
 	public String getNombre() {
             return nombre;
 	}
     /**
      * Cambia el nombre del producto
-     * @param nombre String con el nuevo nombre
+     * @param nombre, String con el nuevo nombre
      * @assert.pre nombre!=""
      */
 	public void setNombre(String nombre) {
@@ -88,16 +84,15 @@ public class Producto {
             this.nombre = nombre;
 	}
     /**
-     * Devuelve el precio del producto en centimos
-     * @return precio int con el precio  en centimos
+     * Devuelve el precio del producto en céntimos
+     * @return precio, double con el precio  en céntimos
      */
 	public double getPrecio() {
             return precio;
 	}
-	
 	/**
 	 * Cambia el precio del producto
-	 * @param precio int con el nuevo precio
+	 * @param precio, double con el nuevo precio
 	 * @assert.pre precio>0
 	 */
 	public void setPrecio(double precio) {
@@ -106,15 +101,14 @@ public class Producto {
 	}
     /**
      * Devuelve el upc del producto
-     * @return upc long con el upc
+     * @return upc, String con el upc
      */
 	public String getUpc() {
             return upc;
 	}
-	
     /**
      * Cambia el upc del producto
-     * @param upc long con el nuevo upc
+     * @param upc, String con el nuevo upc
      * @assert.pre upc.length()==11
      * @assert.pre UPCValido(upc)
      */
@@ -130,9 +124,9 @@ public class Producto {
 		return "Nombre del producto: "+getNombre()+", precio: "+getPrecio()+" euros, UPC: "+getUpc();
 	}
 	/**
-	 * Devuelve un boolean que indica si dos productos son iguales (no tienen por que ser el mismo)
-	 * @param otro Producto para comparar
-	 * @return boolean true si son los dos objetos iguales
+	 * Devuelve un boolean que indica si dos productos son iguales o no
+	 * @param otro, otro producto para comparar
+	 * @return boolean, true si son los dos productos iguales
 	 */
 	public boolean equals(Producto otro){
 		if(this.nombre==otro.nombre && this.precio==otro.precio && this.upc==otro.upc){
