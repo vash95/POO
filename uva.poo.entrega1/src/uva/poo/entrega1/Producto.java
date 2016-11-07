@@ -110,6 +110,7 @@ public class Producto {
 	public String getUpc() {
             return upc;
 	}
+	
     /**
      * Cambia el upc del producto
      * @param upc long con el nuevo upc
