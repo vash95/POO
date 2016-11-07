@@ -12,7 +12,7 @@ public class prueba {
 		Producto ta = new Producto("rita",5.0,"66666666669");
 		
 		//System.out.println(polloAlLimon.toString());
-		//miwell what
+		//miwell what marga mola
 		sen.añadirVariosProductos(polloAlLimon, 0, 10);
 		sen.añadirUnProducto(ta, 2);
 		System.out.println(sen.infoMaquina());
