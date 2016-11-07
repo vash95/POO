@@ -28,60 +28,114 @@ public class MaquinaVending {
 	       maquina.add((ArrayList<Producto>)fila.clone()); 
 	     }
 	   }
+   public boolean filaLlena(int index){
+	   if(getMaquina().get(index).get(getCantidad()-1)!=null){
+		   if(getMaquina().get(index).get(getCantidad())==null){
+			   return true;
+		   }
+	   }
+	   return false;
+   }
+   public void reponerFila(Producto producto,int index){
+	   assert(!filaLlena(index));
+	   while(!filaLlena(index)){
+		   añadirUnProducto(producto, index);
+	   }
+   }
+   public void vaciarFila(int index){
+	   while(!getMaquina().get(index).isEmpty()){
+		   quitaUno(index);
+	   }
+   }
    //Funciones de añadir/eleminar uno o varios 
    public void añadirUnProducto(Producto producto, int linea){
-     maquina.get(linea).add(producto);
+	   assert(filaLlena(linea)!=true);
+	   getMaquina().get(linea).add(producto);
    }
+   
    public void añadirVariosProductos(Producto producto , int linea , int cantidad){
 	   for(int i =0;i<cantidad;i++){
 		   añadirUnProducto(producto,linea);
 	   }
    }
-   public void removeOne(int linea){
-	   if(maquina.get(linea).isEmpty()!=true){
-		   maquina.get(linea).remove(0);
-	   }
+   public void quitaUno(int linea){
+	   assert(getMaquina().get(linea).isEmpty()!=true);
+		   getMaquina().get(linea).remove(0);
+	   
    }
-   public void removeVariosProductos(int linea , int cantidad){
+   public void quitaVarios(int linea , int cantidad){
 	   for(int i =0;i<cantidad;i++){
-		   removeOne(linea);
+		   quitaUno(linea);
 	   }
    }
    //obtener el producto
    public Producto getProducto(int linea) {
-	   if(maquina.get(linea).isEmpty()!=true){
-		   return maquina.get(linea).get(0);
-	   }
-	    return null;
+	   assert(getMaquina().get(linea).isEmpty()!=true);
+	   Producto pedido =getMaquina().get(linea).get(0);
+		   return pedido;
    }
-   //obtener el precio de un producto 
-   public double precio(int linea){
-	   if(maquina.get(linea).isEmpty()!=true){
-	   return maquina.get(linea).get(0).getPrecio();
-	   }
-	   return 0;
+   //obtener el precioProducto de un producto 
+   public double precioProducto(int linea){
+	   assert(getMaquina().get(linea).isEmpty()!=true);
+	   double precioProducto=getMaquina().get(linea).get(0).getPrecio();
+	   return precioProducto;
+	  
    }
    //el tamaño de la maquina
    public int getSizeMaq(){
-	  return  maquina.size();
+	   int tam=getMaquina().size();
+	  return  tam;
    }
    //la cantidad de productos
    public int getSizeFil(int index){
-		  return  maquina.get(index).size();
+	   	int tamfil=getMaquina().get(index).size();
+		  return  tamfil;
+	   }
+   
+   public String infoMaquina(){
+	     String info="";
+	     int cont=0;
+	     for(int i=0;i<getTamMaquina();i++){
+	       for(Producto E: getFila(i)){
+	         cont++;
+	       }
+	       if(!getFila(i).isEmpty()){
+	         info+="Hay "+cont+" "+getFila(i).get(0).getNombre()+" en la posicion "+i+"\n";
+	         cont=0;
+	       }
+	     }
+	     return info;
 	   }
    //metodo comprar
    public void comprar(int index,TarjetaMonedero card){
-	   if(getProducto(index)!=null){
-		   if(card.getSaldoActual()>=precio(index)){
-			   card.descontarDelSaldo("6Z1y00Nm31aA-571", precio(index));
-			   removeOne(index);
-			   System.out.println("aqui tines tu polla , sorry digo tu pollo");
-		   }else{
-			   System.out.println("No tienes DInero puta");
-		   }
-	   }else{
-		   System.out.println("NO hay puta");
-	   }
-	   
+	   assert(getProducto(index)!=null);
+	   assert(card.getSaldoActual()<precioProducto(index));
+	   card.descontarDelSaldo("6Z1y00Nm31aA-571", precioProducto(index));
+	   quitaUno(index);
    }
+
+   public ArrayList<ArrayList<Producto>> getMaquina() {
+	   return maquina;
+   }
+
+	public ArrayList<Producto> getFila(int index) {
+		return maquina.get(index);
+	}
+
+	public int getTamMaquina() {
+		return tamMaquina;
+	}
+
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setMaquina(ArrayList<ArrayList<Producto>> maquina) {
+		this.maquina = maquina;
+	}
+
+	public void setFila(ArrayList<Producto> fila) {
+		this.fila = fila;
+	}
+   
 } 
