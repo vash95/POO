@@ -94,6 +94,7 @@ public class Producto {
 	public double getPrecio() {
             return precio;
 	}
+	
 	/**
 	 * Cambia el precio del producto
 	 * @param precio int con el nuevo precio
