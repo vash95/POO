@@ -3,9 +3,10 @@ import java.util.ArrayList;
 
 import fabricante.externo.tarjetas.TarjetaMonedero;
 /**
- * 
- * @author 
- *
+ * Implementación de máquinas vending que tendrán productos, y de varios servicios que ofrecerá esta máquina
+ * @author Álvaro Benito Navarro
+ * @author Miguel Gonzalez Bravo
+ * @author Borja Rabadán Martín
  */
 public class MaquinaVending {
 	private ArrayList<ArrayList<Producto>> maquina ;
