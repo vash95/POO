@@ -23,7 +23,7 @@ public class MaquinaVending {
 	}
   
    public MaquinaVending(int tamMaquina, int cantidad){
-	   	 assert(this.tamMaquina>0&&this.cantidad>0);
+	   	 assert(this.tamMaquina>0 && this.cantidad>0);
 	     this.tamMaquina=tamMaquina;
 	     this.cantidad=cantidad;
 	     maquina=new ArrayList<ArrayList<Producto>>()	;
