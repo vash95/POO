@@ -3,7 +3,10 @@ import java.util.ArrayList;
 
 import fabricante.externo.tarjetas.TarjetaMonedero;
 /**
- * Implementación de máquinas vending que tendrán productos, y de varios servicios que ofrecerá esta máquina
+ * Gestión de máquinas vending 
+ * Estas máquinas contienen filas, y cada fila contiene los mismos productos
+ * Las filas tienen una cantidad máxima de productos
+ * Facilita varios servicios relacionados con la gestión de los productos en la máquina de vending
  * @author Álvaro Benito Navarro
  * @author Miguel Gonzalez Bravo
  * @author Borja Rabadán Martín
@@ -32,14 +35,13 @@ public class MaquinaVending {
 	       maquina.add((ArrayList<Producto>)fila.clone()); 
 	     }
 	   }
-   //aqui tenemos un fallo
+  
    public boolean filaLlena(int index){
-	   if(getMaquina().get(index).get(getCantidad()-1)!=null){
-		   if(getMaquina().get(index).get(getCantidad())==null){
-			   return true;
-		   }
-	   }
-	   return false;
+	   assert(index>0);
+	   if(getSizeFil(index)==getCantidad()){
+	     return true;
+	   }else{
+	   return false;}
    }
    public void reponerFila(Producto producto,int index){
 	   assert(!filaLlena(index));

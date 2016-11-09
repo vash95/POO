@@ -42,7 +42,10 @@ public class TestMaquinaVending {
 	}
 	//Hata aqui el contructor bien
 	@Test
-	public void testMaquinaVendingSReponerFilaProductoValido() {
+	public void testMaquinaVendingSFilaLlenaValida() {
 		MaquinaVending m= new MaquinaVending(10,10);
+		Producto polloAlLimon = new Producto("Pollo al limón",5.0,"80808080800");
+		m.añadirVariosProductos(polloAlLimon, 0, 10);
+		assertEquals(m.filaLlena(0), true);
 	}
 }
