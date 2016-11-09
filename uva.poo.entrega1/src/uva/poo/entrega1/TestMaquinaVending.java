@@ -27,9 +27,10 @@ public class TestMaquinaVending {
 	public void testMaquinaVendingInicializadaConTamañoIvalidoNegativo() {
 		MaquinaVending m= new MaquinaVending(-1,10);
 	}
+	@Test
 	public void testMaquinaVendingInicializadaConCantidadValida() {
-		MaquinaVending m= new MaquinaVending(10,10);
-		assertEquals(m.getCantidad(),10);
+		MaquinaVending m= new MaquinaVending(1,1);
+		assertEquals(1,m.getCantidad());
 	}
 	@Test(expected=java.lang.AssertionError.class)
 	public void testMaquinaVendingInicializadaConCantidadInvalidaCero() {
@@ -39,101 +40,9 @@ public class TestMaquinaVending {
 	public void testMaquinaVendingInicializadaConCantidadInvalidaNegativa() {
 		MaquinaVending m= new MaquinaVending(10,-1);
 	}
-	//Fin prueba constructor
-	public void testFilaLlenaValida() {
+	//Hata aqui el contructor bien
+	@Test
+	public void testMaquinaVendingSReponerFilaProductoValido() {
 		MaquinaVending m= new MaquinaVending(10,10);
-		Producto p= new Producto ("cosa",2.0,"12345678901");
-		m.reponerFila(p,1);
-		assertEquals(m.filaLlena(1),true);
 	}
-	@Test
-	public void testReponerFila() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testVaciarFila() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testAñadirUnProducto() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testAñadirVariosProductos() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testQuitaUno() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testQuitaVarios() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetProducto() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testPrecioProducto() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetSizeMaq() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetSizeFil() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testInfoMaquina() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testComprar() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetMaquina() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetFila() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetTamMaquina() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetCantidad() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetMaquina() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetFila() {
-		fail("Not yet implemented");
-	}
-
 }

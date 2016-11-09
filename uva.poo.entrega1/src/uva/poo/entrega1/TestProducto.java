@@ -40,6 +40,12 @@ public class TestProducto {
 		Producto p = new Producto ("hola",1.0,"12345678901");
 		assertEquals(p.getUpc(),"123456789012");
 	}
+	@Test
+	public void testProductoSetUPCCorrecto() {
+		Producto p = new Producto ("hola",1.0,"12345678901");
+		p.setUpc("12345678901");
+		assertEquals(p.getUpc(),"123456789012");
+	}
 	@Test(expected=java.lang.AssertionError.class)
 	public void testProductoInicializadoConUPCTamaño() {
 		Producto p = new Producto ("hola",1.0,"1234567890");

@@ -23,7 +23,7 @@ public class MaquinaVending {
 	}
   
    public MaquinaVending(int tamMaquina, int cantidad){
-	   	 assert(this.tamMaquina>0 && this.cantidad>0);
+	   	 assert(tamMaquina>0 && cantidad>0);
 	     this.tamMaquina=tamMaquina;
 	     this.cantidad=cantidad;
 	     maquina=new ArrayList<ArrayList<Producto>>()	;
@@ -32,6 +32,7 @@ public class MaquinaVending {
 	       maquina.add((ArrayList<Producto>)fila.clone()); 
 	     }
 	   }
+   //aqui tenemos un fallo
    public boolean filaLlena(int index){
 	   if(getMaquina().get(index).get(getCantidad()-1)!=null){
 		   if(getMaquina().get(index).get(getCantidad())==null){
