@@ -51,7 +51,7 @@ public class MaquinaVending {
    * @return boolean true si la fila está llena
    */
    public boolean filaLlena(int index){
-	   assert(index>0 && index<getTamMaquina());
+	   assert(index>=0 && index<getTamMaquina());
 	   if(getSizeFil(index)==getCantidad()){
 	     return true;
 	   }else{
@@ -63,6 +63,8 @@ public class MaquinaVending {
     * @param index int del número de la fila
     */
    public void reponerFila(Producto producto,int index){
+	   assert(index>=0 && index<getTamMaquina());
+	   assert(producto!=null);
 	   assert(!filaLlena(index));
 	   while(!filaLlena(index)){
 		   añadirUnProducto(producto, index);
@@ -73,6 +75,7 @@ public class MaquinaVending {
     * @param index int del número de la fila
     */
    public void vaciarFila(int index){
+	   assert(index>=0 && index<getTamMaquina());
 	   while(!getMaquina().get(index).isEmpty()){
 		   quitaUno(index);
 	   }
@@ -84,7 +87,9 @@ public class MaquinaVending {
     * @param index int del número de la fila
     */
    public void añadirUnProducto(Producto producto, int index){
-	   assert(filaLlena(index)!=true);
+	   assert(index>=0 && index<getTamMaquina());
+	   assert(producto!=null);
+	   assert(!filaLlena(index));
 	   getMaquina().get(index).add(producto);
    }
    /**
@@ -94,6 +99,9 @@ public class MaquinaVending {
     * @param cantidad int de la cantidad de productos que quiere añadir
     */
    public void añadirVariosProductos(Producto producto , int index , int cantidad){
+	   assert(producto!=null);
+	   assert(index>=0 && index<getTamMaquina());
+	   assert(cantidad>0);
 	   for(int i =0;i<cantidad;i++){
 		   añadirUnProducto(producto,index);
 	   }
@@ -103,14 +111,17 @@ public class MaquinaVending {
     * @param index int del número de la fila
     */
    public void quitaUno(int index){
+	   assert(index>=0 && index<getTamMaquina());
 	   assert(getMaquina().get(index).isEmpty()!=true);
 		   getMaquina().get(index).remove(0);
 	   
    }
 //este metodo necesita un comprobador de si esta vacia
-   public void quitaVarios(int linea , int cantidad){
+   public void quitaVarios(int index , int cantidad){
+	   assert(index>=0 && index<getTamMaquina());
+	   assert(cantidad>0);
 	   for(int i =0;i<cantidad;i++){
-		   quitaUno(linea);
+		   quitaUno(index);
 	   }
    }
    /**
@@ -120,6 +131,7 @@ public class MaquinaVending {
     * @return pedido el Producto de la fila
     */
    public Producto getProducto(int index) {
+	   assert(index>=0 && index<getTamMaquina());
 	   assert(getMaquina().get(index).isEmpty()!=true);
 	   Producto pedido =getMaquina().get(index).get(0);
 		   return pedido;
@@ -129,9 +141,10 @@ public class MaquinaVending {
     * @param index int del número de la fila
     * @return precioProducto double con el precio del producto de la fila
     */
-   public double precioProducto(int linea){
-	   assert(getMaquina().get(linea).isEmpty()!=true);
-	   double precioProducto=getMaquina().get(linea).get(0).getPrecio();
+   public double precioProducto(int index){
+	   assert(index>=0 && index<getTamMaquina());
+	   assert(getMaquina().get(index).isEmpty()!=true);
+	   double precioProducto=getMaquina().get(index).get(0).getPrecio();
 	   return precioProducto;
 	  
    }
@@ -149,6 +162,7 @@ public class MaquinaVending {
     * @return tamFil int con el número de productos 
     */
    public int getSizeFil(int index){
+	   assert(index>=0 && index<getTamMaquina());
 	   	int tamFil=getMaquina().get(index).size();
 		  return  tamFil;
 	   }
@@ -183,6 +197,7 @@ public class MaquinaVending {
    }
 
 	public ArrayList<Producto> getFila(int index) {
+		assert(index>=0 && index<getTamMaquina());
 		return maquina.get(index);
 	}
 
@@ -195,10 +210,12 @@ public class MaquinaVending {
 	}
 
 	public void setMaquina(ArrayList<ArrayList<Producto>> maquina) {
+		assert(maquina!=null);
 		this.maquina = maquina;
 	}
 
 	public void setFila(ArrayList<Producto> fila) {
+		assert(fila!=null);
 		this.fila = fila;
 	}
    
