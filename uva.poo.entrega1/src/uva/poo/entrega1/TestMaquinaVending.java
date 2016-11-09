@@ -40,7 +40,7 @@ public class TestMaquinaVending {
 	public void testMaquinaVendingInicializadaConCantidadInvalidaNegativa() {
 		MaquinaVending m= new MaquinaVending(10,-1);
 	}
-	//Hata aqui el contructor bien
+	//Hata aqui el contructor bien y hacer test de todos los servicios
 	@Test
 	public void testMaquinaVendingSFilaLlenaValida() {
 		MaquinaVending m= new MaquinaVending(10,10);

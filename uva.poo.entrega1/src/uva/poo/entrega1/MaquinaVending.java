@@ -86,12 +86,16 @@ public class MaquinaVending {
     * @param producto a añadir a la fila
     * @param index int del número de la fila
     */
-   public void añadirUnProducto(Producto producto, int index){
-	   assert(index>=0 && index<getTamMaquina());
-	   assert(producto!=null);
-	   assert(!filaLlena(index));
-	   getMaquina().get(index).add(producto);
-   }
+   public void añadirUnProducto(Producto producto, int index){	
+	 assert(producto!=null);
+     assert(filaLlena(index)!=true);
+     if(!getFila(index).isEmpty() && !producto.equals(getFila(index).get(0))){
+	       vaciarFila(index);
+	       getFila(index).add(producto);
+		     }else{
+		       getFila(index).add(producto);}
+	   }
+   
    /**
     * Indica un producto, una fila y una cantidad, para añadir un número determinado de esos productos a una fila
     * @param producto a añadir a la fila
@@ -191,7 +195,19 @@ public class MaquinaVending {
 	   card.descontarDelSaldo("6Z1y00Nm31aA-571", precioProducto(index));
 	   quitaUno(index);
    }
-
+   public void reponerTodo(){
+	   Producto repuesto ;
+	   for(int i=0;i<getTamMaquina();i++){
+	       if(!getFila(i).isEmpty()){
+	    	   while(getSizeFil(i)<getCantidad()){
+	    		   	repuesto = getMaquina().get(i).get(0);
+	    		    añadirUnProducto(repuesto, i);
+	    	  }
+	       }
+	   }
+   }
+   
+   
    public ArrayList<ArrayList<Producto>> getMaquina() {
 	   return maquina;
    }
