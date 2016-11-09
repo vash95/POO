@@ -25,7 +25,7 @@ public class TestProducto {
 	@Test
 	public void testProductoInicializadoConPrecio() {
 		Producto p = new Producto ("hola",30.01,"12345678901");
-		assertEquals(30.01, p.getPrecio(), 0.1);;
+		assertEquals(p.getPrecio(), 30.01 , 0.1);;
 	}
 	@Test(expected=java.lang.AssertionError.class)
 	public void testProductoInicializadoConPrecioInvalidoNegativo() {

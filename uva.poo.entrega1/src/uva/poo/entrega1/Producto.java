@@ -45,7 +45,7 @@ public class Producto {
 		int s=0,a,m;
 		String r,resultado;
 		for(int i =0;i<11;i++){
-			a=((int)getUpc().charAt(i))-48;
+			a=((int)upc.charAt(i))-48;
 			if(i%2==0){
 				s+=a*3;
 			}else{
