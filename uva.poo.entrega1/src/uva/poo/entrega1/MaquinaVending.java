@@ -37,7 +37,7 @@ public class MaquinaVending {
 	   }
   
    public boolean filaLlena(int index){
-	   assert(index>0);
+	   assert(index>0 && index<getTamMaquina());
 	   if(getSizeFil(index)==getCantidad()){
 	     return true;
 	   }else{
