@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import fabricante.externo.tarjetas.TarjetaMonedero;
 /**
  * Gestión de máquinas vending 
- * Estas máquinas contienen filas, y cada fila contiene los mismos productos
+ * Estas máquinas contienen filas, y cada fila debe contener los mismos productos
  * Las filas tienen una cantidad máxima de productos
  * Facilita varios servicios relacionados con la gestión de los productos en la máquina de vending
  * @author Álvaro Benito Navarro
@@ -16,7 +16,10 @@ public class MaquinaVending {
 	private ArrayList<Producto> fila;
 	private int tamMaquina;
 	private int cantidad;
-   
+   /**
+    * Inicializacion de la máquina de vending
+    * Se tiene una maquina con una fila y una capacidad de un producto en dicha fila
+    */
 	public MaquinaVending(){
 		tamMaquina = 1;
 		cantidad = 1;
@@ -24,7 +27,13 @@ public class MaquinaVending {
 		fila = new ArrayList<Producto>(cantidad);
 		maquina.add(fila);
 	}
-  
+  /**
+   * Inicialización con numero de filas y tamaño indicado por el cliente
+   * @param tamMaquina int con el numero de filas de la máquina. debe ser positiva
+   * @param cantidad in con la cantidad de productos que caben en la máquina. Debe ser positiva
+   * @assert.pre tamMaquina>0
+   * @assert.pre cantidad>0
+   */
    public MaquinaVending(int tamMaquina, int cantidad){
 	   	 assert(tamMaquina>0 && cantidad>0);
 	     this.tamMaquina=tamMaquina;
@@ -35,7 +44,12 @@ public class MaquinaVending {
 	       maquina.add((ArrayList<Producto>)fila.clone()); 
 	     }
 	   }
-  
+  /**
+   * Informa con un boolean de si la fila indicada está llena o no
+   * Devuelve true si está llena
+   * @param index int del número de la fila
+   * @return boolean true si la fila está llena
+   */
    public boolean filaLlena(int index){
 	   assert(index>0 && index<getTamMaquina());
 	   if(getSizeFil(index)==getCantidad()){
@@ -43,63 +57,105 @@ public class MaquinaVending {
 	   }else{
 	   return false;}
    }
+   /**
+    * Llena la fila indicada con el producto dado
+    * @param producto con el que rellenar la fila
+    * @param index int del número de la fila
+    */
    public void reponerFila(Producto producto,int index){
 	   assert(!filaLlena(index));
 	   while(!filaLlena(index)){
 		   añadirUnProducto(producto, index);
 	   }
    }
+   /**
+    * Vacía la fila indicada hasta dejarla sin productos
+    * @param index int del número de la fila
+    */
    public void vaciarFila(int index){
 	   while(!getMaquina().get(index).isEmpty()){
 		   quitaUno(index);
 	   }
    }
-   //hola
-   //Funciones de añadir/eleminar uno o varios 
-   public void añadirUnProducto(Producto producto, int linea){
-	   assert(filaLlena(linea)!=true);
-	   getMaquina().get(linea).add(producto);
+   /**
+    * Añade un producto indicado a la fila señalada de la máquina
+    * El producto queda el último 
+    * @param producto a añadir a la fila
+    * @param index int del número de la fila
+    */
+   public void añadirUnProducto(Producto producto, int index){
+	   assert(filaLlena(index)!=true);
+	   getMaquina().get(index).add(producto);
    }
-   
-   public void añadirVariosProductos(Producto producto , int linea , int cantidad){
+   /**
+    * Indica un producto, una fila y una cantidad, para añadir un número determinado de esos productos a una fila
+    * @param producto a añadir a la fila
+    * @param index int del número de la fila
+    * @param cantidad int de la cantidad de productos que quiere añadir
+    */
+   public void añadirVariosProductos(Producto producto , int index , int cantidad){
 	   for(int i =0;i<cantidad;i++){
-		   añadirUnProducto(producto,linea);
+		   añadirUnProducto(producto,index);
 	   }
    }
-   public void quitaUno(int linea){
-	   assert(getMaquina().get(linea).isEmpty()!=true);
-		   getMaquina().get(linea).remove(0);
+   /**
+    * Quita el primer producto de una fila indicada
+    * @param index int del número de la fila
+    */
+   public void quitaUno(int index){
+	   assert(getMaquina().get(index).isEmpty()!=true);
+		   getMaquina().get(index).remove(0);
 	   
    }
+//este metodo necesita un comprobador de si esta vacia
    public void quitaVarios(int linea , int cantidad){
 	   for(int i =0;i<cantidad;i++){
 		   quitaUno(linea);
 	   }
    }
-   //obtener el producto
-   public Producto getProducto(int linea) {
-	   assert(getMaquina().get(linea).isEmpty()!=true);
-	   Producto pedido =getMaquina().get(linea).get(0);
+   /**
+    * Devuelve el producto que hay en la fila indicada
+    * Si la fila está vacía devuelve null
+    * @param index int del número de la fila
+    * @return pedido el Producto de la fila
+    */
+   public Producto getProducto(int index) {
+	   assert(getMaquina().get(index).isEmpty()!=true);
+	   Producto pedido =getMaquina().get(index).get(0);
 		   return pedido;
    }
-   //obtener el precioProducto de un producto 
+   /**
+    * Informa del precio del Producto que hay en la fila indicada
+    * @param index int del número de la fila
+    * @return precioProducto double con el precio del producto de la fila
+    */
    public double precioProducto(int linea){
 	   assert(getMaquina().get(linea).isEmpty()!=true);
 	   double precioProducto=getMaquina().get(linea).get(0).getPrecio();
 	   return precioProducto;
 	  
    }
-   //el tamaño de la maquina
+   /**
+    * Devuelve el tamaño de la máquina, el número de filas que tiene
+    * @return tam int con el número de filas
+    */
    public int getSizeMaq(){
 	   int tam=getMaquina().size();
 	  return  tam;
    }
-   //la cantidad de productos
+   /**
+    * Devuelve el número de productos que hay en la fila indicada
+    * @param index int del número de la fila
+    * @return tamFil int con el número de productos 
+    */
    public int getSizeFil(int index){
-	   	int tamfil=getMaquina().get(index).size();
-		  return  tamfil;
+	   	int tamFil=getMaquina().get(index).size();
+		  return  tamFil;
 	   }
-   
+   /**
+    * Devuelve un String con la información de la máquina (......rellenar..........)
+    * @return info, String con la información
+    */
    public String infoMaquina(){
 	     String info="";
 	     int cont=0;
