@@ -34,16 +34,18 @@ public class Producto {
 	public Producto(String nombre, double precio, String upc){
 		assert (nombre!="");
 		assert (precio>0.0);
-		assert (upc.length()==11):"upc no valido";
+		assert (upc.length()==12):"upc no valido";
 		assert (UPCValido(upc));
+		assert(DigitoDeControl(upc));
 		this.nombre=nombre;
 		this.precio=precio;
-		this.upc=DigitoDeControl(upc);
+		this.upc=upc;
 	}
-	private String DigitoDeControl(String upc){
+	private boolean DigitoDeControl(String upc){
+		
 		//Método que cambia el valor de UPC para añadir el dígito de control 
 		int s=0,a,m;
-		String r,resultado;
+		String r;
 		for(int i =0;i<11;i++){
 			a=((int)upc.charAt(i))-48;
 			if(i%2==0){
@@ -54,8 +56,10 @@ public class Producto {
 		}
 		m=10-(s%10);  
 		r=String.valueOf(m%10);
-		resultado=upc+r;
-		return resultado;
+		if(r.equals(Character.toString(upc.charAt(11)))){
+			return true;
+			}
+		return false;
 	}
 	private static boolean UPCValido(String cad){
 		//Comprueba si un String que contiene el UPC es válido
@@ -113,9 +117,10 @@ public class Producto {
      * @assert.pre UPCValido(upc)
      */
 	public void setUpc(String upc) {
-		assert (upc.length()==11);
+		assert (upc.length()==12);
 		assert (UPCValido(upc));
-		this.upc = DigitoDeControl(upc);
+		assert(DigitoDeControl(upc));
+		this.upc = upc;
 	}
 	/**
 	 * Devuelve un String con la información del producto
