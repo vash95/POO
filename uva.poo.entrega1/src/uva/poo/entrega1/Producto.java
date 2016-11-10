@@ -24,16 +24,16 @@ public class Producto {
 	 * Inicializa una instancia de la clase Producto con los valores dados como argumento
 	 * El dígito de control se calcula automáticamente
 	 * @param nombre String con el nombre
-	 * @param precio double que indica el precio en céntimos
-	 * @param upc String con los dígitos del UPC, sin el de control
+	 * @param precio double que indica el precio de un producto en euros
+	 * @param upc String con los dígitos 12 del UPC, incluyendo el de control
 	 * @assert.pre nombre!=""
-	 * @assert.pre precio>0
-	 * @assert.pre upc.length()==11
+	 * @assert.pre precio>0.00
+	 * @assert.pre upc.length()==12
      * @assert.pre UPCValido(upc)
 	 */
 	public Producto(String nombre, double precio, String upc){
 		assert (nombre!="");
-		assert (precio>0.0);
+		assert (precio>0.00);
 		assert (upc.length()==12):"upc no valido";
 		assert (UPCValido(upc));
 		assert(DigitoDeControl(upc));
@@ -41,8 +41,8 @@ public class Producto {
 		this.precio=precio;
 		this.upc=upc;
 	}
+	
 	private boolean DigitoDeControl(String upc){
-		
 		//Método que cambia el valor de UPC para añadir el dígito de control 
 		int s=0,a,m;
 		String r;
@@ -61,8 +61,9 @@ public class Producto {
 			}
 		return false;
 	}
+	
 	private static boolean UPCValido(String cad){
-		//Comprueba si un String que contiene el UPC es válido
+		//Comprueba si un String que contiene el UPC es solo números
 		boolean valido=true;
 		for (int i=0; i<cad.length(); i++){
 			//Comprueba que el digito sea un numero
@@ -73,7 +74,7 @@ public class Producto {
 	}
     /**
      * Devuelve el nombre del producto
-     * @return nombre, String con el nombre
+     * @return nombre String con el nombre
      */
 	public String getNombre() {
             return nombre;
@@ -88,15 +89,15 @@ public class Producto {
             this.nombre = nombre;
 	}
     /**
-     * Devuelve el precio del producto en céntimos
-     * @return precio en céntimos
+     * Devuelve el precio del producto en euros
+     * @return precio double en euros
      */
 	public double getPrecio() {
             return precio;
 	}
 	/**
 	 * Cambia el precio del producto
-	 * @param precio double con el nuevo precio
+	 * @param precio double con el nuevo precio en euros
 	 * @assert.pre precio>0
 	 */
 	public void setPrecio(double precio) {
@@ -113,7 +114,7 @@ public class Producto {
     /**
      * Cambia el upc del producto
      * @param upc String con el nuevo upc
-     * @assert.pre upc.length()==11
+     * @assert.pre upc.length()==12
      * @assert.pre UPCValido(upc)
      */
 	public void setUpc(String upc) {
@@ -129,8 +130,8 @@ public class Producto {
 		return "Nombre del producto: "+getNombre()+", precio: "+getPrecio()+" euros, UPC: "+getUpc();
 	}
 	/**
-	 * Devuelve un boolean que indica si dos productos son iguales o no
-	 * @param otro producto para comparar
+	 * Indica si dos productos son iguales o no
+	 * @param otro Producto para comparar
 	 * @return boolean true si son los dos productos iguales
 	 */
 	public boolean equals(Producto otro){
