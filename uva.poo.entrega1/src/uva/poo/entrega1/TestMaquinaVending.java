@@ -302,7 +302,7 @@ public class TestMaquinaVending {
 		MaquinaVending m= new MaquinaVending(2,3);
 		Producto p=new Producto("nombre",1.0,"123456789012");
 		m.añadirUnProducto(p, 1);
-		String s="Hay 1 nombre en la posicion 1 con un precio de 1.0 euros.\n";
+		String s="Hay 1 nombre en la fila 1 con un precio de 1.0 euros.\n";
 		assertTrue(s.equals(m.infoMaquina()));
 	}
 	
