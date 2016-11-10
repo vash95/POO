@@ -146,6 +146,7 @@ public class MaquinaVending {
     * @param cantidad int de la cantidad de productos que se quiere quitar
     * @assert.pre index>0
     * @assert.pre index<getTamMaquina()
+    * @assert.pre cantidad>0
     */
    public void quitaVarios(int index , int cantidad){
 	   assert(index>=0 && index<getTamMaquina());
@@ -161,6 +162,7 @@ public class MaquinaVending {
     * @return pedido el Producto de la fila
     * @assert.pre index>0
     * @assert.pre index<getTamMaquina()
+    * @assert.pre getMaquina().get(index).isEmpty()!=true
     */
    public Producto getProducto(int index) {
 	   assert(index>=0 && index<getTamMaquina());
@@ -195,6 +197,8 @@ public class MaquinaVending {
     * Devuelve el número de productos que hay en la fila indicada
     * @param index int del número de la fila
     * @return tamFil int con el número de productos 
+    * @assert.pre index>0
+    * @assert.pre index<getTamMaquina()
     */
    public int getSizeFil(int index){
 	   assert(index>=0 && index<getTamMaquina());
@@ -250,6 +254,9 @@ public class MaquinaVending {
     * @param indexFila int del número de la fila
     * @param indexPosicion int con el número de la posición en la fila
     * @return pedido, Producto pedido
+    * @assert.pre indexFila>0
+    * @assert.pre indexFila<getTamMaquina()
+    * @assert.pre getSizeFil(indexFila)
     */
    public Producto getProductoPosicion(int indexFila, int indexPosicion){
 	   assert(indexFila>=0 && indexFila<getTamMaquina());
@@ -269,6 +276,8 @@ public class MaquinaVending {
     * Devuelve la fila indicada
     * @param index int del número de la fila
     * @return maquina.get(index) La fila indicada de la máquina
+    * @assert.pre index>0
+    * @assert.pre index<getTamMaquina()
     */
 	public ArrayList<Producto> getFila(int index) {
 		assert(index>=0 && index<getTamMaquina());
