@@ -26,14 +26,18 @@ public class Producto {
 	 * @param nombre String con el nombre
 	 * @param precio double que indica el precio de un producto en euros
 	 * @param upc String con los dígitos 12 del UPC, incluyendo el de control
+	 * @assert.pre nombre!=null
 	 * @assert.pre nombre!=""
-	 * @assert.pre precio>0.00
+	 * @assert.pre precio>0
+	 * @assert.pre upc!=null
 	 * @assert.pre upc.length()==12
      * @assert.pre UPCValido(upc)
 	 */
 	public Producto(String nombre, double precio, String upc){
+		assert (nombre!=null);
 		assert (nombre!="");
-		assert (precio>0.00);
+		assert (precio>0);
+		assert (upc!=null);
 		assert (upc.length()==12):"upc no valido";
 		assert (UPCValido(upc));
 		assert(DigitoDeControl(upc));
@@ -82,11 +86,13 @@ public class Producto {
     /**
      * Cambia el nombre del producto
      * @param nombre String nombre del producto
+     * @assert.pre nombre!=null
      * @assert.pre nombre!=""
      */
 	public void setNombre(String nombre) {
-			assert (nombre!="");
-            this.nombre = nombre;
+		assert (nombre!=null);
+		assert (nombre!="");	
+        this.nombre = nombre;
 	}
     /**
      * Devuelve el precio del producto en euros
@@ -101,7 +107,7 @@ public class Producto {
 	 * @assert.pre precio>0
 	 */
 	public void setPrecio(double precio) {
-            assert (precio>0.0);
+            assert (precio>0);
             this.precio = precio;
 	}
     /**
@@ -113,11 +119,13 @@ public class Producto {
 	}
     /**
      * Cambia el upc del producto
+     * @assert.pre nombre!=null
      * @param upc String con el nuevo upc
      * @assert.pre upc.length()==12
      * @assert.pre UPCValido(upc)
      */
 	public void setUpc(String upc) {
+		assert (upc!=null);
 		assert (upc.length()==12);
 		assert (UPCValido(upc));
 		assert(DigitoDeControl(upc));

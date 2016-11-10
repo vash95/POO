@@ -13,9 +13,9 @@ public class prueba {
 		sen.añadirUnProducto(polloAlLimon, 0);
 		//sen.reponerFila(CojonDeObispo, 2);
 		sen.vaciarFila(1);
-	
+		Producto p = new Producto ("hola",1.0,"123456789012");
 		//sen.añadirUnProducto(polloAlLimon, 2);
-		//System.out.println(sen.filaLlena(3));
+		System.out.println(p.toString());
 	}
 
 }
