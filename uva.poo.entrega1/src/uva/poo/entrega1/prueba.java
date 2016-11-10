@@ -11,13 +11,9 @@ public class prueba {
 		Producto polloAlLimon = new Producto("Pollo al limón",5.0,"80808080800");
 		Producto CojonDeObispo = new Producto("Cojones de obispo",4.0,"80808080869");
 		sen.añadirUnProducto(polloAlLimon, 0);
-		sen.añadirUnProducto(CojonDeObispo, 2);
-		System.out.println(sen.infoMaquina());
-		sen.añadirUnProducto(polloAlLimon, 2);
-		System.out.println("TIo que voy a reponer\n");
-		sen.reponerTodo();
-		System.out.println(sen.infoMaquina());
-		
+		//sen.reponerFila(CojonDeObispo, 2);
+		sen.vaciarFila(1);
+	
 		//sen.añadirUnProducto(polloAlLimon, 2);
 		//System.out.println(sen.filaLlena(3));
 	}

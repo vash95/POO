@@ -72,6 +72,7 @@ public class MaquinaVending {
    }
    /**
     * Vacía la fila indicada hasta dejarla sin productos
+    *
     * @param index int del número de la fila
     */
    public void vaciarFila(int index){
@@ -89,6 +90,7 @@ public class MaquinaVending {
    public void añadirUnProducto(Producto producto, int index){	
 	 assert(producto!=null);
      assert(filaLlena(index)!=true);
+     assert(index>=0 && index<getTamMaquina());
      if(!getFila(index).isEmpty() && !producto.equals(getFila(index).get(0))){
 	       vaciarFila(index);
 	       getFila(index).add(producto);
@@ -188,48 +190,84 @@ public class MaquinaVending {
 	     }
 	     return info;
 	   }
-   //metodo comprar
+   /**
+    * 
+    * @param index
+    * @param card
+    */
    public void comprar(int index,TarjetaMonedero card){
 	   assert(getProducto(index)!=null);
 	   assert(card.getSaldoActual()<precioProducto(index));
 	   card.descontarDelSaldo("6Z1y00Nm31aA-571", precioProducto(index));
 	   quitaUno(index);
    }
+   /**
+    * 
+    */
    public void reponerTodo(){
 	   Producto repuesto ;
 	   for(int i=0;i<getTamMaquina();i++){
 	       if(!getFila(i).isEmpty()){
-	    	   while(getSizeFil(i)<getCantidad()){
 	    		   	repuesto = getMaquina().get(i).get(0);
-	    		    añadirUnProducto(repuesto, i);
+	    		   	reponerFila(repuesto, i);
 	    	  }
 	       }
 	   }
+   /**
+    * 
+    * @param index
+    * @param index2
+    * @return
+    */
+   public Producto getProductoPosicion(int index, int index2){
+	   assert(index>=0 && index<getTamMaquina());
+	   assert(index2<=getSizeFil(index));
+	   assert(getMaquina().get(index).isEmpty()!=true);
+	   Producto pedido = getFila(index).get(index2);
+	   return pedido;
    }
-   
-   
+   /**
+    * 
+    * @return
+    */
    public ArrayList<ArrayList<Producto>> getMaquina() {
 	   return maquina;
    }
-
+   /**
+    * 
+    * @param index
+    * @return
+    */
 	public ArrayList<Producto> getFila(int index) {
 		assert(index>=0 && index<getTamMaquina());
 		return maquina.get(index);
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public int getTamMaquina() {
 		return tamMaquina;
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public int getCantidad() {
 		return cantidad;
 	}
-
+	/**
+	 * 
+	 * @param maquina
+	 */
 	public void setMaquina(ArrayList<ArrayList<Producto>> maquina) {
 		assert(maquina!=null);
 		this.maquina = maquina;
 	}
-
+	/**
+	 * 
+	 * @param fila
+	 */
 	public void setFila(ArrayList<Producto> fila) {
 		assert(fila!=null);
 		this.fila = fila;
