@@ -169,8 +169,8 @@ public class MaquinaVending {
     */
    public int getSizeFil(int index){
 	   assert(index>=0 && index<getTamMaquina());
-	   	int tamFil=getMaquina().get(index).size();
-		  return  tamFil;
+	   int tamFil=getMaquina().get(index).size();
+	   return  tamFil;
 	   }
    /**
     * Devuelve un String con la información de la máquina (......rellenar..........)
@@ -184,7 +184,7 @@ public class MaquinaVending {
 	         cont++;
 	       }
 	       if(!getFila(i).isEmpty()){
-	         info+="Hay "+cont+" "+getFila(i).get(0).getNombre()+" en la posicion "+i+"\n";
+	         info+="Hay "+cont+" "+getProducto(i).getNombre()+" en la posicion "+i+" con un precio de "+precioProducto(i)+" euros."+"\n";
 	         cont=0;
 	       }
 	     }
@@ -215,15 +215,15 @@ public class MaquinaVending {
 	   }
    /**
     * 
-    * @param index
-    * @param index2
+    * @param indexFila
+    * @param indexPosicion
     * @return
     */
-   public Producto getProductoPosicion(int index, int index2){
-	   assert(index>=0 && index<getTamMaquina());
-	   assert(index2<=getSizeFil(index));
-	   assert(getMaquina().get(index).isEmpty()!=true);
-	   Producto pedido = getFila(index).get(index2);
+   public Producto getProductoPosicion(int indexFila, int indexPosicion){
+	   assert(indexFila>=0 && indexFila<getTamMaquina());
+	   assert(indexPosicion<=getSizeFil(indexFila));
+	   assert(getMaquina().get(indexFila).isEmpty()!=true);
+	   Producto pedido = getFila(indexFila).get(indexPosicion);
 	   return pedido;
    }
    /**
