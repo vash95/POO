@@ -333,6 +333,7 @@ public class TestMaquinaVending {
 		maquinola.añadirUnProducto(pipas, 1);
 		maquinola.comprar(1, visa);
 	}
+	//aa
 	@Test (expected=java.lang.AssertionError.class)
 	public void testMaquinaVendingReponerTodoValido(){
 		MaquinaVending maquinola= new MaquinaVending(2,3);
