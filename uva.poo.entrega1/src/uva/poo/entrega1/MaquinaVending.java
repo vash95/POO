@@ -65,7 +65,7 @@ public class MaquinaVending{
     * @assert.pre index>0
     * @assert.pre index<getTamMaquina()
     * @assert.pre producto!=null
-    * @assert.pre filaLlena(index)!=true
+    * @assert.pre !filaLlena(index)
     */
    public void rellenarFila(Producto producto,int index){
 	   assert(index>=0 && index<getTamMaquina());
@@ -78,7 +78,7 @@ public class MaquinaVending{
    /**
     * Llena una fila indicada de los Productos que ya haya en esa fila
     * @param index int fila indicada
-    * @assert.pre filaLlena(index)!=true
+    * @assert.pre !filaLlena(index)
     * @assert.pre index>0
     * @assert.pre index<getTamMaquina()
     */
@@ -119,12 +119,12 @@ public class MaquinaVending{
     * @assert.pre index>0
     * @assert.pre index<getTamMaquina()
     * @assert.pre producto!=null
-    * @assert.pre filaLlena(index)!=true
+    * @assert.pre !filaLlena(index)
     */
    public void añadirUnProducto(Producto producto, int index){
 	 assert(index>=0 && index<getTamMaquina());
 	 assert(producto!=null);
-     assert(filaLlena(index)!=true);
+     assert(!filaLlena(index));
      if(!getFila(index).isEmpty() && !producto.equals(getFila(index).get(0))){
 	       vaciarFila(index);
 	       getFila(index).add(producto);
@@ -183,7 +183,7 @@ public class MaquinaVending{
     * @return pedido el Producto de la fila
     * @assert.pre index>0
     * @assert.pre index<getTamMaquina()
-    * @assert.pre getMaquina().get(index).isEmpty()!=true
+    * @assert.pre getFila(index).isEmpty()!=true
     */
    public Producto getProducto(int index) {
 	   assert(index>=0 && index<getTamMaquina());
