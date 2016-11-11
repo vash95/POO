@@ -210,13 +210,14 @@ public class MaquinaVending{
     * @return pedido, Producto pedido
     * @assert.pre index>=0 - El índice debe entrar en el rango de las filas que tiene la máquina
     * @assert.pre index<getTamMaquina() - El índice debe entrar en el rango de las filas que tiene la máquina
-    * @assert.pre getSizeFil(indexFila) - La posición debe ser menor o igual al número de productos que ya hay en ella
+    * @assert.pre indexPosicion<=getSizeFil(indexFila) - La posición debe ser menor o igual al número de productos que ya hay en ella
+    * @assert.pre indexPosicion>=0 - La posicion no debe ser negativa
     * @assert.pre getFila(index).isEmpty()==false - La fila no puede estar vacía
+    * 
     */
    public Producto getProductoPosicion(int indexFila, int indexPosicion){
 	   assert(indexFila>=0 && indexFila<getTamMaquina());
-	   //nota
-	   assert(indexPosicion<=getSizeFil(indexFila));
+	   assert(indexPosicion>=0&&indexPosicion<getSizeFil(indexFila));
 	   assert(!getFila(indexFila).isEmpty());
 	   Producto pedido = getFila(indexFila).get(indexPosicion);
 	   return pedido;
