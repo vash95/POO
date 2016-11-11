@@ -7,7 +7,12 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import fabricante.externo.tarjetas.TarjetaMonedero;
-
+/**
+ * JUNIT4 CLASE DE PRUEBAS MAQUINAVENDING
+* @author Álvaro Benito Navarro
+* @author Miguel González Bravo
+* @author Borja Rabadán Martín
+*/
 public class TestMaquinaVending {
 
 	@Test

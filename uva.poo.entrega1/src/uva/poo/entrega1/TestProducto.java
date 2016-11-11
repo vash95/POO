@@ -4,6 +4,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**
+ * JUNIT4 CLASE DE PRUEBAS PRODUCTO
+* @author Álvaro Benito Navarro
+* @author Miguel González Bravo
+* @author Borja Rabadán Martín
+*/
 public class TestProducto {
 
 	@Test
