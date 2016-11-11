@@ -393,8 +393,11 @@ public class TestMaquinaVending {
 	@Test
 	public void getMaquinaValida(){
 		MaquinaVending maquinola= new MaquinaVending(2,3);
-	//	ArrayList<ArrayList<Producto>> maquina1=(ArrayList<ArrayList<Producto>>)maquinola;
-	//	assertEquals(maquinola, maquina1);
+		ArrayList<ArrayList<Producto>> maquina1=new ArrayList<ArrayList<Producto>>(2);
+		for(int i=0;i<2;i++){
+			maquina1.add(maquinola.getFila(i));
+		}
+		assertEquals(maquinola.getMaquina(),maquina1);
 	}
 	@Test
 	public void getFilaValida(){

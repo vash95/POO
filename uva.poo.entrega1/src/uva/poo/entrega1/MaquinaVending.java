@@ -1,6 +1,5 @@
 package uva.poo.entrega1;
 import java.util.ArrayList;
-
 import fabricante.externo.tarjetas.TarjetaMonedero;
 /**
  * Gestión de máquinas vending.
@@ -11,7 +10,7 @@ import fabricante.externo.tarjetas.TarjetaMonedero;
  * @author Miguel Gonzalez Bravo
  * @author Borja Rabadán Martín
  */
-public class MaquinaVending implements Cloneable{
+public class MaquinaVending{
 	private ArrayList<ArrayList<Producto>> maquina ;
 	private ArrayList<Producto> fila;
 	private int tamMaquina;
