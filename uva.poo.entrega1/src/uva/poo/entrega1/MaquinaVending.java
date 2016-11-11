@@ -67,12 +67,26 @@ public class MaquinaVending{
     * @assert.pre producto!=null
     * @assert.pre filaLlena(index)!=true
     */
-   public void reponerFila(Producto producto,int index){
+   public void rellenarFila(Producto producto,int index){
 	   assert(index>=0 && index<getTamMaquina());
 	   assert(producto!=null);
 	   assert(!filaLlena(index));
 	   while(!filaLlena(index)){
 		   añadirUnProducto(producto, index);
+	   }
+   }
+   /**
+    * Llena una fila indicada de los Productos que ya haya en esa fila
+    * @param index int fila indicada
+    * @assert.pre filaLlena(index)!=true
+    * @assert.pre index>0
+    * @assert.pre index<getTamMaquina()
+    */
+   public void reponerFila(int index){
+	   assert(index>=0 && index<getTamMaquina());
+	   assert(!filaLlena(index));
+	   while(!filaLlena(index)){
+		   rellenarFila(getProducto(index), index);
 	   }
    }
    /**
@@ -86,6 +100,15 @@ public class MaquinaVending{
 	   assert(index>=0 && index<getTamMaquina());
 	   while(!getMaquina().get(index).isEmpty()){
 		   quitaUno(index);
+	   }
+   }
+   /**
+    * Vacía todas las filas de la máquina 
+    * Si está vacía no hace nada
+    */
+   public void vaciarMaquina(){
+	   for(int i=0;i<getTamMaquina();i++){
+		   vaciarFila(i);
 	   }
    }
    /**
@@ -131,13 +154,12 @@ public class MaquinaVending{
     * @param index int del número de la fila
     * @assert.pre index>0
     * @assert.pre index<getTamMaquina()
-    * @assert.pre getMaquina().get(index).isEmpty()!=true
+    * @assert.pre getFila(index).isEmpty()!=true
     */
    public void quitaUno(int index){
 	   assert(index>=0 && index<getTamMaquina());
-	   assert(getMaquina().get(index).isEmpty()!=true);
+	   assert(getFila(index).isEmpty()!=true);
 		   getMaquina().get(index).remove(0);
-	   
    }
    /**
     * Quita de una fila indicada un número dado de productos
@@ -165,7 +187,7 @@ public class MaquinaVending{
     */
    public Producto getProducto(int index) {
 	   assert(index>=0 && index<getTamMaquina());
-	   assert(getMaquina().get(index).isEmpty()!=true);
+	   assert(getFila(index).isEmpty()!=true);
 	   Producto pedido =getMaquina().get(index).get(0);
 		   return pedido;
    }
@@ -175,14 +197,41 @@ public class MaquinaVending{
     * @return precioProducto double con el precio del producto de la fila
     * @assert.pre index>0
     * @assert.pre index<getTamMaquina()
-    * @assert.pre getMaquina().get(index).isEmpty()!=true
+    * @assert.pre getFila(index).isEmpty()!=true
     */
    public double precioProducto(int index){
 	   assert(index>=0 && index<getTamMaquina());
-	   assert(getMaquina().get(index).isEmpty()!=true);
+	   assert(getFila(index).isEmpty()!=true);
 	   double precioProducto=getMaquina().get(index).get(0).getPrecio();
 	   return precioProducto;
-	  
+   }
+   /**
+    * Devuelve el nombre del producto de la fila indicada
+    * @param index int fila indicada
+    * @return nombre String nombre del producto
+    * @assert.pre index>0
+    * @assert.pre index<getTamMaquina()
+    * @assert.pre getFila(index).isEmpty()!=true
+    */
+   public String nombreProducto(int index){
+	   assert(index>=0 && index<getTamMaquina());
+	   assert(getFila(index).isEmpty()!=true);
+	   String nombre = getProducto(index).getNombre();
+	   return nombre;
+   }
+   /**
+    * Devuelve el upc del producto de la fila indicada
+    * @param index int fila indicada
+    * @return nombre String upc del producto
+    * @assert.pre index>0
+    * @assert.pre index<getTamMaquina()
+    * @assert.pre getFila(index).isEmpty()!=true
+    */
+   public String upcProducto(int index){
+	   assert(index>=0 && index<getTamMaquina());
+	   assert(getFila(index).isEmpty()!=true);
+	   String upc = getProducto(index).getUpc();
+	   return upc;
    }
    /**
     * Devuelve el tamaño de la máquina, el número de filas que tiene
@@ -206,6 +255,7 @@ public class MaquinaVending{
 	   }
    /**
     * Devuelve un String con la información de la máquina (Producto, su precio y número de productos por cada fila)
+    * Si está vacía no devuelve nada
     * @return info, String con la información
     */
    public String infoMaquina(){
@@ -226,11 +276,14 @@ public class MaquinaVending{
     * Permite comprar el primer producto de una fila de la máquina
     * @param index int del número de la fila
     * @param card Tarjeta con la que desea pagar
-    * @assert.pre getProducto(index)!=null
+    * @assert.pre index>0
+    * @assert.pre index<getTamMaquina()
+    * @assert.pre !getFila(index).isEmpty()
     * @assert.pre card.getSaldoActual()<precioProducto(index)
     */
    public void comprar(int index,TarjetaMonedero card){
-	   assert(getProducto(index)!=null);
+	   assert(index>0 && index<getTamMaquina());
+	   assert(!getFila(index).isEmpty());
 	   assert(card.getSaldoActual()>=precioProducto(index));
 	   card.descontarDelSaldo("6Z1y00Nm31aA-571", precioProducto(index));
 	   quitaUno(index);
@@ -244,7 +297,7 @@ public class MaquinaVending{
 	   for(int i=0;i<getTamMaquina();i++){
 	       if(!getFila(i).isEmpty()){
 	    		   	repuesto = getMaquina().get(i).get(0);
-	    		   	reponerFila(repuesto, i);
+	    		   	rellenarFila(repuesto, i);
 	    	  }
 	       }
 	   }

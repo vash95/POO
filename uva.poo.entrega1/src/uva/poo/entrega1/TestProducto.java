@@ -18,9 +18,11 @@ public class TestProducto {
 		Producto p = new Producto ("     ",1.0,"123456789012");
 	}
 	@Test
-	public void testInicializarProductoConNombreValido() {
+	public void testInicializarProductoValido() {
 		Producto p = new Producto ("hola",1.0,"123456789012");
 		assertEquals(p.getNombre(),"hola");
+		assertEquals(p.getUpc(),"123456789012");
+		assertEquals(p.getPrecio(),1.0,0.1);
 	}
 	@Test(expected=java.lang.AssertionError.class)
 	public void testInicializarProductoConNombreInvalidoNull() {
@@ -30,11 +32,7 @@ public class TestProducto {
 	public void testInicializarProductoConNombreInvalidoVacio() {
 		Producto p = new Producto ("",-1.0,"123456789012");
 	}
-	@Test
-	public void testInicializarProductoConPrecioValido() {
-		Producto p = new Producto ("hola",30.01,"123456789012");
-		assertEquals(p.getPrecio(), 30.01 , 0.1);;
-	}
+
 	@Test(expected=java.lang.AssertionError.class)
 	public void testInicializarProductoConPrecioInvalidoNegativo() {
 		Producto p = new Producto ("hola",-1.0,"123456789012");
@@ -43,11 +41,7 @@ public class TestProducto {
 	public void testInicializarProductoConPrecioInvalidoCero() {
 		Producto p = new Producto ("hola",0.0,"123456789012");
 	}
-	@Test
-	public void testInicializarProductoUPCCorrecto() {
-		Producto p = new Producto ("hola",1.0,"123456789012");
-		assertEquals(p.getUpc(),"123456789012");
-	}
+
 	@Test(expected=java.lang.AssertionError.class)
 	public void testInicializarProductoUPCTamañoMenorDe12Invalido() {
 		Producto p = new Producto ("hola",1.0,"12345678901");
