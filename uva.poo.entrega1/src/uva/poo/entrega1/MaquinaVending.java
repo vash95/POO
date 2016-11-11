@@ -28,10 +28,10 @@ public class MaquinaVending{
 	}
   /**
    * Inicialización con número de filas y tamaño indicado por el cliente
-   * @param tamMaquina int con el número de filas de la máquina. Debe ser positiva
-   * @param cantidad int con la cantidad de productos que caben en la máquina. Debe ser positiva
-   * @assert.pre tamMaquina>0
-   * @assert.pre cantidad>0
+   * @param tamMaquina int con el número de filas de la máquina.
+   * @param cantidad int con la cantidad de productos que caben en la máquina.
+   * @assert.pre tamMaquina>0 - el tamaño debe ser estrictamente positivo
+   * @assert.pre cantidad>0 -  la cantidad debe ser estrictamente positiva
    */
    public MaquinaVending(int tamMaquina, int cantidad){
 	   	 assert(tamMaquina>0 && cantidad>0);
@@ -44,12 +44,11 @@ public class MaquinaVending{
 	     }
 	   }
   /**
-   * Informa con un boolean de si la fila indicada está llena o no
-   * Devuelve true si está llena
+   * Informa con un boolean de si la fila indicada está llena o no. Devuelve true si está llena
    * @param index int del número de la fila
    * @return boolean true si la fila está llena
-   * @assert.pre index>0
-   * @assert.pre index<getTamMaquina()
+   * @assert.pre index>=0 - El índice debe entrar en el rango de las filas que tiene la máquina
+   * @assert.pre index<getTamMaquina() - El índice debe entrar en el rango de las filas que tiene la máquina
    */
    public boolean filaLlena(int index){
 	   assert(index>=0 && index<getTamMaquina());
@@ -59,67 +58,13 @@ public class MaquinaVending{
 	   return false;}
    }
    /**
-    * Llena la fila indicada con el producto dado
-    * @param producto con el que rellenar la fila
-    * @param index int del número de la fila
-    * @assert.pre index>0
-    * @assert.pre index<getTamMaquina()
-    * @assert.pre producto!=null
-    * @assert.pre !filaLlena(index)
-    */
-   public void rellenarFila(Producto producto,int index){
-	   assert(index>=0 && index<getTamMaquina());
-	   assert(producto!=null);
-	   assert(!filaLlena(index));
-	   while(!filaLlena(index)){
-		   añadirUnProducto(producto, index);
-	   }
-   }
-   /**
-    * Llena una fila indicada de los Productos que ya haya en esa fila
-    * @param index int fila indicada
-    * @assert.pre !filaLlena(index)
-    * @assert.pre index>0
-    * @assert.pre index<getTamMaquina()
-    */
-   public void reponerFila(int index){
-	   assert(index>=0 && index<getTamMaquina());
-	   assert(!filaLlena(index));
-	   while(!filaLlena(index)){
-		   rellenarFila(getProducto(index), index);
-	   }
-   }
-   /**
-    * Vacía la fila indicada hasta dejarla sin productos
-    * Si la fila está vacía inicialmente, no modificará nada
-    * @param index int del número de la fila
-    * @assert.pre index>0
-    * @assert.pre index<getTamMaquina()
-    */
-   public void vaciarFila(int index){
-	   assert(index>=0 && index<getTamMaquina());
-	   while(!getMaquina().get(index).isEmpty()){
-		   quitaUno(index);
-	   }
-   }
-   /**
-    * Vacía todas las filas de la máquina 
-    * Si está vacía no hace nada
-    */
-   public void vaciarMaquina(){
-	   for(int i=0;i<getTamMaquina();i++){
-		   vaciarFila(i);
-	   }
-   }
-   /**
     * Añade un producto indicado a la fila señalada de la máquina
-    * El producto queda el último 
-    * @param producto a añadir a la fila
-    * @param index int del número de la fila
-    * @assert.pre index>0
-    * @assert.pre index<getTamMaquina()
-    * @assert.pre producto!=null
-    * @assert.pre !filaLlena(index)
+    * @param producto Producto a añadir a la fila
+    * @param index int del número de la fila.
+    * @assert.pre index>=0 - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre index<getTamMaquina() - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre producto!=null - El producto no puede ser nulo
+    * @assert.pre !filaLlena(index) - La fila no puede estar llena
     */
    public void añadirUnProducto(Producto producto, int index){
 	 assert(index>=0 && index<getTamMaquina());
@@ -136,10 +81,11 @@ public class MaquinaVending{
     * @param producto Producto a añadir a la fila
     * @param index int del número de la fila
     * @param cantidad int de la cantidad de productos que se quiere añadir
-    * @assert.pre index>0
-    * @assert.pre index<getTamMaquina()
-    * @assert.pre producto!=null
-    * @assert.pre cantidad>0
+    * @assert.pre index>=0 - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre index<getTamMaquina() - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre producto!=null - El producto no puede ser nulo
+    * @assert.pre !filaLlena(index) - La fila no puede estar llena
+    * @assert.pre cantidad>0 - La cantidad no puede ser negativa
     */
    public void añadirVariosProductos(Producto producto , int index , int cantidad){
 	   assert(index>=0 && index<getTamMaquina());
@@ -149,6 +95,50 @@ public class MaquinaVending{
 		   añadirUnProducto(producto,index);
 	   }
    }
+   /**
+    * Llena la fila indicada con el producto dado
+    * @param producto con el que rellenar la fila
+    * @param index int del número de la fila
+    * @assert.pre index>=0 - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre index<getTamMaquina() - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre producto!=null - El producto no puede ser nulo
+    * @assert.pre !filaLlena(index) - La fila no puede estar llena
+    */
+   public void rellenarFila(Producto producto,int index){
+	   assert(index>=0 && index<getTamMaquina());
+	   assert(producto!=null);
+	   assert(!filaLlena(index));
+	   while(!filaLlena(index)){
+		   añadirUnProducto(producto, index);
+	   }
+   }
+   /**
+    * Llena una fila indicada de los Productos que ya haya en esa fila
+    * @param index int fila indicada
+    * @assert.pre index>=0 - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre index<getTamMaquina() - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre !filaLlena(index) - La fila no puede estar llena
+    */
+   public void reponerFila(int index){
+	   assert(index>=0 && index<getTamMaquina());
+	   assert(!filaLlena(index));
+	   while(!filaLlena(index)){
+		   rellenarFila(getProducto(index), index);
+	   }
+   }
+   /**
+    * Permite llenar todas las filas de la máquina de los productos que hay en ellas
+    * Si una fila está vacía se queda vacía
+    */
+   public void reponerTodo(){
+	   Producto repuesto;
+	   for(int i=0;i<getTamMaquina();i++){
+	       if(!getFila(i).isEmpty()){
+	    		   	repuesto = getMaquina().get(i).get(0);
+	    		   	rellenarFila(repuesto, i);
+	    	  }
+	       }
+	   }
    /**
     * Quita el primer producto de una fila indicada
     * @param index int del número de la fila
@@ -165,9 +155,9 @@ public class MaquinaVending{
     * Quita de una fila indicada un número dado de productos
     * @param index int del número de la fila
     * @param cantidad int de la cantidad de productos que se quiere quitar
-    * @assert.pre index>0
-    * @assert.pre index<getTamMaquina()
-    * @assert.pre cantidad>0
+    * @assert.pre index>=0 - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre index<getTamMaquina() - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre cantidad>0 - La cantidad no puede ser negativa
     */
    public void quitaVarios(int index , int cantidad){
 	   assert(index>=0 && index<getTamMaquina());
@@ -177,13 +167,35 @@ public class MaquinaVending{
 	   }
    }
    /**
+    * Vacía la fila indicada hasta dejarla sin productos
+    * Si la fila está vacía inicialmente, no modificará nada
+    * @param index int del número de la fila
+    * @assert.pre index>=0 - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre index<getTamMaquina() - El índice debe entrar en el rango de las filas que tiene la máquina
+    */
+   public void vaciarFila(int index){
+	   assert(index>=0 && index<getTamMaquina());
+	   while(!getMaquina().get(index).isEmpty()){
+		   quitaUno(index);
+	   }
+   }
+   /**
+    * Vacía todas las filas de la máquina 
+    * Si está vacía no modifica nada
+    */
+   public void vaciarMaquina(){
+	   for(int i=0;i<getTamMaquina();i++){
+		   vaciarFila(i);
+	   }
+   }
+   /**
     * Devuelve el producto que hay en la fila indicada
     * Si la fila está vacía devuelve null
     * @param index int del número de la fila
-    * @return pedido el Producto de la fila
-    * @assert.pre index>0
-    * @assert.pre index<getTamMaquina()
-    * @assert.pre getFila(index).isEmpty()!=true
+    * @return pedido Producto de la fila
+    * @assert.pre index>=0 - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre index<getTamMaquina() - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre getFila(index).isEmpty()==true - La fila no puede estar vacía
     */
    public Producto getProducto(int index) {
 	   assert(index>=0 && index<getTamMaquina());
@@ -192,12 +204,43 @@ public class MaquinaVending{
 		   return pedido;
    }
    /**
+    * Devuelve el producto que hay en una posición de la fila indicada
+    * @param indexFila int del número de la fila
+    * @param indexPosicion int con el número de la posición en la fila
+    * @return pedido, Producto pedido
+    * @assert.pre index>=0 - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre index<getTamMaquina() - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre getSizeFil(indexFila) - La posición debe ser menor o igual al número de productos que ya hay en ella
+    * @assert.pre getFila(index).isEmpty()==false - La fila no puede estar vacía
+    */
+   public Producto getProductoPosicion(int indexFila, int indexPosicion){
+	   assert(indexFila>=0 && indexFila<getTamMaquina());
+	   assert(indexPosicion<=getSizeFil(indexFila));
+	   assert(!getFila(indexFila).isEmpty());
+	   Producto pedido = getFila(indexFila).get(indexPosicion);
+	   return pedido;
+   }
+   /**
+    * Devuelve el nombre del producto de la fila indicada
+    * @param index int fila indicada
+    * @return nombre String nombre del producto
+    * @assert.pre index>=0 - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre index<getTamMaquina() - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre getFila(index).isEmpty()==false - La fila no puede estar vacía
+    */
+   public String nombreProducto(int index){
+	   assert(index>=0 && index<getTamMaquina());
+	   assert(!getFila(index).isEmpty());
+	   String nombre = getProducto(index).getNombre();
+	   return nombre;
+   }
+   /**
     * Informa del precio del Producto que hay en la fila indicada
     * @param index int del número de la fila
     * @return precioProducto double con el precio del producto de la fila
-    * @assert.pre index>0
-    * @assert.pre index<getTamMaquina()
-    * @assert.pre getFila(index).isEmpty()!=true
+    * @assert.pre index>=0 - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre index<getTamMaquina() - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre getFila(index).isEmpty()==false - La fila no puede estar vacía
     */
    public double precioProducto(int index){
 	   assert(index>=0 && index<getTamMaquina());
@@ -206,26 +249,12 @@ public class MaquinaVending{
 	   return precioProducto;
    }
    /**
-    * Devuelve el nombre del producto de la fila indicada
-    * @param index int fila indicada
-    * @return nombre String nombre del producto
-    * @assert.pre index>0
-    * @assert.pre index<getTamMaquina()
-    * @assert.pre getFila(index).isEmpty()!=true
-    */
-   public String nombreProducto(int index){
-	   assert(index>=0 && index<getTamMaquina());
-	   assert(getFila(index).isEmpty()!=true);
-	   String nombre = getProducto(index).getNombre();
-	   return nombre;
-   }
-   /**
     * Devuelve el upc del producto de la fila indicada
     * @param index int fila indicada
     * @return nombre String upc del producto
-    * @assert.pre index>0
-    * @assert.pre index<getTamMaquina()
-    * @assert.pre getFila(index).isEmpty()!=true
+    * @assert.pre index>=0 - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre index<getTamMaquina() - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre getFila(index).isEmpty()==false La fila no puede estar vacía
     */
    public String upcProducto(int index){
 	   assert(index>=0 && index<getTamMaquina());
@@ -245,8 +274,8 @@ public class MaquinaVending{
     * Devuelve el número de productos que hay en la fila indicada
     * @param index int del número de la fila
     * @return tamFil int con el número de productos 
-    * @assert.pre index>0
-    * @assert.pre index<getTamMaquina()
+    * @assert.pre index>=0 - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre index<getTamMaquina() - El índice debe entrar en el rango de las filas que tiene la máquina
     */
    public int getSizeFil(int index){
 	   assert(index>=0 && index<getTamMaquina());
@@ -276,10 +305,10 @@ public class MaquinaVending{
     * Permite comprar el primer producto de una fila de la máquina
     * @param index int del número de la fila
     * @param card Tarjeta con la que desea pagar
-    * @assert.pre index>0
-    * @assert.pre index<getTamMaquina()
-    * @assert.pre !getFila(index).isEmpty()
-    * @assert.pre card.getSaldoActual()<precioProducto(index)
+    * @assert.pre index>=0 - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre index<getTamMaquina() - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre getFila(index).isEmpty()==false La fila no puede estar vacía
+    * @assert.pre card.getSaldoActual()<precioProducto(index) - El saldo debe ser mayor o igual al precio del producto
     */
    public void comprar(int index,TarjetaMonedero card){
 	   assert(index>0 && index<getTamMaquina());
@@ -287,35 +316,6 @@ public class MaquinaVending{
 	   assert(card.getSaldoActual()>=precioProducto(index));
 	   card.descontarDelSaldo("6Z1y00Nm31aA-571", precioProducto(index));
 	   quitaUno(index);
-   }
-   /**
-    * Permite llenar todas las filas de la máquina de los productos que hay en ellas
-    * Si una fila está vacía se queda vacía
-    */
-   public void reponerTodo(){
-	   Producto repuesto;
-	   for(int i=0;i<getTamMaquina();i++){
-	       if(!getFila(i).isEmpty()){
-	    		   	repuesto = getMaquina().get(i).get(0);
-	    		   	rellenarFila(repuesto, i);
-	    	  }
-	       }
-	   }
-   /**
-    * Devuelve el producto que hay en una posición de la fila indicada
-    * @param indexFila int del número de la fila
-    * @param indexPosicion int con el número de la posición en la fila
-    * @return pedido, Producto pedido
-    * @assert.pre indexFila>0
-    * @assert.pre indexFila<getTamMaquina()
-    * @assert.pre getSizeFil(indexFila)
-    */
-   public Producto getProductoPosicion(int indexFila, int indexPosicion){
-	   assert(indexFila>=0 && indexFila<getTamMaquina());
-	   assert(indexPosicion<=getSizeFil(indexFila));
-	   assert(getMaquina().get(indexFila).isEmpty()!=true);
-	   Producto pedido = getFila(indexFila).get(indexPosicion);
-	   return pedido;
    }
    /**
     * Devuelve la máquina de vending
@@ -328,8 +328,8 @@ public class MaquinaVending{
     * Devuelve la fila indicada
     * @param index int del número de la fila
     * @return maquina.get(index) La fila indicada de la máquina
-    * @assert.pre index>0
-    * @assert.pre index<getTamMaquina()
+    * @assert.pre index>=0 - El índice debe entrar en el rango de las filas que tiene la máquina
+    * @assert.pre index<getTamMaquina() - El índice debe entrar en el rango de las filas que tiene la máquina
     */
 	public ArrayList<Producto> getFila(int index) {
 		assert(index>=0 && index<getTamMaquina());
