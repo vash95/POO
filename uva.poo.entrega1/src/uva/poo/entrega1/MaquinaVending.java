@@ -144,11 +144,11 @@ public class MaquinaVending{
     * @param index int del número de la fila
     * @assert.pre index>0
     * @assert.pre index<getTamMaquina()
-    * @assert.pre getFila(index).isEmpty()!=true
+    * @assert.pre getFila(index).isEmpty()==false - La fila no puede estar vacía
     */
    public void quitaUno(int index){
 	   assert(index>=0 && index<getTamMaquina());
-	   assert(getFila(index).isEmpty()!=true);
+	   assert(!getFila(index).isEmpty());
 		   getMaquina().get(index).remove(0);
    }
    /**
@@ -195,7 +195,7 @@ public class MaquinaVending{
     * @return pedido Producto de la fila
     * @assert.pre index>=0 - El índice debe entrar en el rango de las filas que tiene la máquina
     * @assert.pre index<getTamMaquina() - El índice debe entrar en el rango de las filas que tiene la máquina
-    * @assert.pre getFila(index).isEmpty()==true - La fila no puede estar vacía
+    * @assert.pre getFila(index).isEmpty()==false - La fila no puede estar vacía
     */
    public Producto getProducto(int index) {
 	   assert(index>=0 && index<getTamMaquina());
@@ -215,6 +215,7 @@ public class MaquinaVending{
     */
    public Producto getProductoPosicion(int indexFila, int indexPosicion){
 	   assert(indexFila>=0 && indexFila<getTamMaquina());
+	   //nota
 	   assert(indexPosicion<=getSizeFil(indexFila));
 	   assert(!getFila(indexFila).isEmpty());
 	   Producto pedido = getFila(indexFila).get(indexPosicion);
@@ -258,7 +259,7 @@ public class MaquinaVending{
     */
    public String upcProducto(int index){
 	   assert(index>=0 && index<getTamMaquina());
-	   assert(getFila(index).isEmpty()!=true);
+	   assert(!getFila(index).isEmpty());
 	   String upc = getProducto(index).getUpc();
 	   return upc;
    }
