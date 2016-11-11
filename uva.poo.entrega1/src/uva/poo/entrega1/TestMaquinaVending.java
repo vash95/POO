@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import fabricante.externo.tarjetas.TarjetaMonedero;
+
 public class TestMaquinaVending {
 
 	@Test
@@ -305,6 +307,74 @@ public class TestMaquinaVending {
 		String s="Hay 1 nombre en la fila 1 con un precio de 1.0 euros.\n";
 		assertTrue(s.equals(m.infoMaquina()));
 	}
-	
-	
+	//FALLO
+	@Test
+	public void testMaquinaVendingComprarValido(){
+		MaquinaVending maquinola= new MaquinaVending(2,3);
+		Producto pipasCaras= new Producto("pipas",20,"123456789012");
+		maquinola.añadirUnProducto(pipasCaras,1);
+		TarjetaMonedero visa= new TarjetaMonedero("A156Bv09_1zXo894",20.0);
+		maquinola.comprar(1, visa);
+		assertEquals(maquinola.getSizeFil(1),0);
+		assertEquals(visa.getSaldoActual(),visa.getSaldoActual(),0.0);
+	}
+	@Test (expected=java.lang.AssertionError.class)
+	public void testMaquinaVendingComprarInvalidoProductoNull(){
+		MaquinaVending maquinola= new MaquinaVending(2,3);
+		TarjetaMonedero visa= new TarjetaMonedero("A156Bv09_1zXo894",20.0);
+		maquinola.comprar(1, visa);
+	}
+	//ERROR
+	@Test (expected=java.lang.AssertionError.class)
+	public void testMaquinaVendingComprarInvalidoSaldoMenorQuePrecio(){
+		MaquinaVending maquinola= new MaquinaVending(2,3);
+		Producto pipas= new Producto("pipas",2.0,"123456789012");
+		TarjetaMonedero visa= new TarjetaMonedero("A156Bv09_1zXo894",1.0);
+		maquinola.añadirUnProducto(pipas, 1);
+		maquinola.comprar(1, visa);
+	}
+	@Test (expected=java.lang.AssertionError.class)
+	public void testMaquinaVendingReponerTodoValido(){
+		MaquinaVending maquinola= new MaquinaVending(2,3);
+		Producto pipas= new Producto("pipas",2.0,"123456789012");
+		maquinola.reponerTodo();
+		maquinola.añadirUnProducto(pipas, 0);
+		maquinola.añadirUnProducto(pipas, 1);
+		assertEquals(maquinola.getSizeFil(0),3);
+		assertEquals(maquinola.getSizeFil(2),3);
+	}
+	@Test
+	public void testMaquinaVendinggetProductoPosicionValido(){
+		MaquinaVending maquinola= new MaquinaVending(2,3);
+		Producto pipas= new Producto("pipas",2.0,"123456789012");
+		maquinola.añadirUnProducto(pipas, 1);
+		maquinola.añadirUnProducto(pipas, 1);
+		assertEquals(maquinola.getProductoPosicion(1, 1),pipas);
+	}
+	@Test (expected=java.lang.AssertionError.class)
+	public void testMaquinaVendinggetProductoPosicionInvalidoFilaNegativa(){
+		MaquinaVending maquinola= new MaquinaVending(2,3);
+		Producto pipas= new Producto("pipas",2.0,"123456789012");
+		maquinola.añadirUnProducto(pipas, 1);
+		maquinola.getProductoPosicion(-1, 0);
+	}
+	@Test (expected=java.lang.AssertionError.class)
+	public void testMaquinaVendinggetProductoPosicionInvalidoFilaMayorAlTamaño(){
+		MaquinaVending maquinola= new MaquinaVending(2,3);
+		Producto pipas= new Producto("pipas",2.0,"123456789012");
+		maquinola.añadirUnProducto(pipas, 1);
+		maquinola.getProductoPosicion(3, 0);
+	}
+	@Test (expected=java.lang.AssertionError.class)
+	public void testMaquinaVendinggetProductoPosicionInvalidoPosicionMayorQueLaCantidadMaxima(){
+		MaquinaVending maquinola= new MaquinaVending(2,3);
+		Producto pipas= new Producto("pipas",2.0,"123456789012");
+		maquinola.añadirUnProducto(pipas, 1);
+		maquinola.getProductoPosicion(1, 4);
+	}
+	public void testMaquinaVendinggetProductoPosicionInvalidoFilaVacia(){
+		MaquinaVending maquinola= new MaquinaVending(2,3);
+		Producto pipas= new Producto("pipa",2.0,"123456789012");
+		maquinola.getProductoPosicion(0, 0);
+	}
 }
