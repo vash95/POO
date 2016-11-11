@@ -11,7 +11,7 @@ import fabricante.externo.tarjetas.TarjetaMonedero;
  * @author Miguel Gonzalez Bravo
  * @author Borja Rabadán Martín
  */
-public class MaquinaVending {
+public class MaquinaVending implements Cloneable{
 	private ArrayList<ArrayList<Producto>> maquina ;
 	private ArrayList<Producto> fila;
 	private int tamMaquina;
@@ -232,7 +232,7 @@ public class MaquinaVending {
     */
    public void comprar(int index,TarjetaMonedero card){
 	   assert(getProducto(index)!=null);
-	   assert(card.getSaldoActual()<precioProducto(index));
+	   assert(card.getSaldoActual()>=precioProducto(index));
 	   card.descontarDelSaldo("6Z1y00Nm31aA-571", precioProducto(index));
 	   quitaUno(index);
    }
@@ -281,7 +281,7 @@ public class MaquinaVending {
     */
 	public ArrayList<Producto> getFila(int index) {
 		assert(index>=0 && index<getTamMaquina());
-		return maquina.get(index);
+		return getMaquina().get(index);
 	}
 	/**
 	 * Devuelve el número de filas que tiene la máquina de vending
@@ -297,20 +297,4 @@ public class MaquinaVending {
 	public int getCantidad() {
 		return cantidad;
 	}
-	/**
-	 * @param maquina
-	 */
-	public void setMaquina(ArrayList<ArrayList<Producto>> maquina) {
-		assert(maquina!=null);
-		this.maquina = maquina;
-	}
-	/**
-	 * 
-	 * @param fila
-	 */
-	public void setFila(ArrayList<Producto> fila) {
-		assert(fila!=null);
-		this.fila = fila;
-	}
-   
 } 

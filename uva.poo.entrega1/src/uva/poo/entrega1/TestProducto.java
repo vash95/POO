@@ -13,6 +13,10 @@ public class TestProducto {
 		assertEquals(p.getUpc(),null);
 		assertEquals(0.0, p.getPrecio(), 0.1);
 	}
+	@Test(expected=java.lang.AssertionError.class)
+	public void testInicializarConNombreVariosEspacioVacio() {
+		Producto p = new Producto ("     ",1.0,"123456789012");
+	}
 	@Test
 	public void testInicializarProductoConNombreValido() {
 		Producto p = new Producto ("hola",1.0,"123456789012");
@@ -20,7 +24,7 @@ public class TestProducto {
 	}
 	@Test(expected=java.lang.AssertionError.class)
 	public void testInicializarProductoConNombreInvalidoNull() {
-		Producto p = new Producto (null,-1.0,"123456789012");
+		Producto p = new Producto (null,1.0,"123456789012");
 	}
 	@Test(expected=java.lang.AssertionError.class)
 	public void testInicializarProductoConNombreInvalidoVacio() {

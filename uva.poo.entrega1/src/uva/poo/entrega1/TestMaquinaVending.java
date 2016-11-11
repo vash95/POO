@@ -373,9 +373,35 @@ public class TestMaquinaVending {
 		maquinola.añadirUnProducto(pipas, 1);
 		maquinola.getProductoPosicion(1, 4);
 	}
+	@Test (expected=java.lang.AssertionError.class)
 	public void testMaquinaVendinggetProductoPosicionInvalidoFilaVacia(){
 		MaquinaVending maquinola= new MaquinaVending(2,3);
 		Producto pipas= new Producto("pipa",2.0,"123456789012");
 		maquinola.getProductoPosicion(0, 0);
+	}
+	@Test
+	public void getCantidadValido(){
+		MaquinaVending maquinola= new MaquinaVending(2,3);
+		Producto pipas= new Producto("pipa",2.0,"123456789012");
+		assertEquals(maquinola.getCantidad(), 3);
+	}
+	@Test
+	public void getTamMaquinaValido(){
+		MaquinaVending maquinola= new MaquinaVending(2,3);
+		assertEquals(maquinola.getTamMaquina(), 2);
+	}
+	@Test
+	public void getMaquinaValida(){
+		MaquinaVending maquinola= new MaquinaVending(2,3);
+	//	ArrayList<ArrayList<Producto>> maquina1=(ArrayList<ArrayList<Producto>>)maquinola;
+	//	assertEquals(maquinola, maquina1);
+	}
+	@Test
+	public void getFilaValida(){
+		MaquinaVending maquinola= new MaquinaVending(2,3);
+		ArrayList<ArrayList<Producto>> maquina1 = new ArrayList<ArrayList<Producto>>(2);
+		ArrayList<Producto> fila = new ArrayList<Producto>(3);
+		maquina1.add(fila);
+		assertEquals(maquinola.getFila(0), maquina1.get(0) );
 	}
 }

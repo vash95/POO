@@ -35,7 +35,7 @@ public class Producto {
 	 */
 	public Producto(String nombre, double precio, String upc){
 		assert (nombre!=null);
-		assert (nombre!="");
+		assert (!nombre.trim().equals(""));
 		assert (precio>0);
 		assert (upc!=null);
 		assert (upc.length()==12):"upc no valido";
@@ -91,7 +91,7 @@ public class Producto {
      */
 	public void setNombre(String nombre) {
 		assert (nombre!=null);
-		assert (nombre!="");	
+		assert (!nombre.trim().equals(""));	
         this.nombre = nombre;
 	}
     /**

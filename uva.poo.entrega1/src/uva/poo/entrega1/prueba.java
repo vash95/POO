@@ -12,10 +12,8 @@ public class prueba {
 		Producto CojonDeObispo = new Producto("Cojones de obispo",4.0,"80808080869");
 		sen.añadirUnProducto(polloAlLimon, 0);
 		//sen.reponerFila(CojonDeObispo, 2);
-		sen.vaciarFila(1);
-		Producto p = new Producto ("hola",1.0,"123456789012");
-		//sen.añadirUnProducto(polloAlLimon, 2);
-		System.out.println(p.toString());
+		System.out.println(sen.getProducto(0));
+		System.out.println(sen.getFila(0));
 	}
 
 }
