@@ -2,9 +2,9 @@ package uva.poo.entrega1;
 /**
  * Implementación de productos que tienen nombre, precio y UCP.
  * Práctica 1 de POO
- * @author Álvaro Benito Navarro
- * @author Miguel González Bravo
- * @author Borja Rabadán Martín
+ * @author alvbeni
+ * @author miggonz
+ * @author borraba
  *
  */
 public class Producto {

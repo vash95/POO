@@ -6,9 +6,9 @@ import fabricante.externo.tarjetas.TarjetaMonedero;
  * Estas máquinas contienen filas, y cada fila debe contener los mismos productos
  * Las filas tienen una cantidad máxima de productos
  * Facilita varios servicios relacionados con la gestión de los productos en la máquina de vending
- * @author Álvaro Benito Navarro
- * @author Miguel Gonzalez Bravo
- * @author Borja Rabadán Martín
+ * @author alvbeni
+ * @author miggonz
+ * @author borraba
  */
 public class MaquinaVending{
 	private ArrayList<ArrayList<Producto>> maquina ;

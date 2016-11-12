@@ -6,9 +6,9 @@ import org.junit.Test;
 
 /**
  * JUNIT4 CLASE DE PRUEBAS PRODUCTO
-* @author Álvaro Benito Navarro
-* @author Miguel González Bravo
-* @author Borja Rabadán Martín
+ * @author alvbeni
+ * @author miggonz
+ * @author borraba
 */
 public class TestProducto {
 
